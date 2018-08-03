@@ -1,0 +1,61 @@
+<ion-view>
+    <ion-nav-bar class="head-block">
+        <ion-nav-back-button class="button-clear" ng-click="myGoBack('gotoaccsummary')">
+            <i hidden class="ion-arrow-left-c"></i>
+            <svg class="backbtn" baseprofile="full" width="28px" height="32px">
+                 <polygon class="svg-primary-color" fill="#00AFC8" points="0, 12, 28, 0, 28, 8, 0, 20"></polygon>
+                 <polygon class="svg-secondary-color" fill="#354F5F" points="0, 12, 28, 24, 28, 32, 0, 20"></polygon>
+            </svg>
+        </ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-header-bar class="bar-subheader heightauto">
+        <div class="row">
+            <div class="col p-left0">
+                <div class="welcome-msg">
+                    <label class="headerfont font-bold" ng-bind-html="'MEMOVE-SETTINGS_LANDING-PAGE_ACCOUNT-HEADER_TITLE' | translate"></label>
+                </div>
+            </div>
+        </div>          
+      </ion-header-bar>
+    <ion-content class="me-settings-stls">
+        <div class="row" ng-repeat="list in settings" >
+            <div class="col m-top10 m-left20 m-right20 settings-border" ng-click="selectAccountSettingType(list)" ng-hide="(list.id == '1' && hideBalsweep)||(list.id == '2' && hideDailyLimit)">
+                <label class="txt-tertiary-16" ng-bind-html="list.settingName | translate"></label>
+                <i class="ion-chevron-right m-left10 pull-right txt-primary-clr"></i>
+                <label class="pull-right font-bold txt-primary-clr" ng-bind-html="list.onandoff"></label>
+                
+                <div ng-if="sweepFrequencyShow">
+                    <div ng-if="list.id == '1'" class="p-top10 txt-tertiary-16">
+                        <span ng-bind-html="'MEMOVE-SETTINGS_LANDING-PAGE_BALANCE-SWEEP-ONFREQUENCY_LABEL' | translate"></span>
+                        <span ng-bind-html="sweepFrequency | translate"></span>
+                      </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="m-top20">
+            <div class="row">
+                <div class="col">
+                    <div class="welcome-msg">
+                        <label class="headerfont font-bold" ng-bind-html="'MEMOVE-SETTINGS_LANDING-PAGE_SETTINGS-DEVICE_LABEL' | translate"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="row" ng-repeat="list in devicesettings">
+                <div ng-if="lblnIsAndroid && list.android || lblnIsIOS && list.iOS" class="col m-top10 m-left20 m-right20 settings-border" ng-click="selectDeviceSettingType(list)">
+                <!-- <div class="col m-top10 m-left20 m-right20 settings-border" ng-click="selectDeviceSettingType(list)"> -->
+                    <label class="txt-tertiary-16" ng-bind-html="list.devicesettingName | translate"></label>
+                    <i class="ion-chevron-right m-left10 pull-right txt-primary-clr"></i>
+                    <label class="pull-right font-bold txt-primary-clr">
+                        <font ng-if="lblnIsAndroid && isTouchIdAvailableForDevice === true && touchIdEnabledOnDevice === true && $index == 0">ON</font>
+                        <font ng-if="lblnIsAndroid && isTouchIdAvailableForDevice === true && touchIdEnabledOnDevice === false && $index == 0" >OFF</font>
+                        <font ng-if="lblnIsIOS && touchIdEnabledOnDevice === true  && $index == 0">ON</font>
+                        <font ng-if="lblnIsIOS && touchIdEnabledOnDevice === false && $index == 0" >OFF</font>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <logout-mepay class="small-logout-block-other" options="" showappversion="true"></logout-mepay>
+    </ion-content>
+    <logout-mepay class="bigscreen-logout-block-other" options="" showappversion="true"></logout-mepay>
+</ion-view>
